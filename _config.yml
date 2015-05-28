@@ -1,0 +1,12 @@
+# Site settings
+title: Whisk Labs
+email: tech@whisk.co.uk
+description: > # this means to ignore newlines until "baseurl:"
+  Open-source code and documentation from Whisk.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "https://whisk.com" # the base hostname & protocol for your site
+twitter_username: whiskteam
+github_username:  whisklabs
+
+# Build settings
+markdown: kramdown
