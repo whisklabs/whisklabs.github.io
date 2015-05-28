@@ -100,7 +100,6 @@ Ok, so we're not going to win any design awards, but you get the idea.
 
 ## Widgets with nested buttons
 
-
 The examples we've seen so far are very simple, and you're likely to want more control over the precise markup of your widget, including changing where the user has to click to add the product to the Whisk Shopping List.
 
 There's an extra data attribute to give you flexibility over the click-target that opens the Whisk Shopping List: `data-whisk-action`.
@@ -119,7 +118,7 @@ By default, the element marked `data-whisk-widget` is a click target, and clicks
 </div>
 {% endhighlight %}
 
-Once again, here's how it looks:
+Here's how it looks:
 
 <div data-whisk-widget
     data-whisk-product-text="Chocolate"
@@ -134,6 +133,85 @@ Once again, here's how it looks:
 
 
 ## Changing Whisk behaviour with <i>Actions</i>
+
+Nesting buttons inside Whisk widgets may appear contrived, but there is a specific use case where it excels.
+
+All previous examples have added the specified product to their Whisk Shopping List. This is a common action, but the users of your site will also want to get back to their Whisk Shopping List without adding new items.
+
+This can be achieved using `data-whisk-action`, and specifying a value for the action. Valid action values are:
+
+<table>
+  <thead>
+    <tr><th>action</th><th>Code</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>add_product_to_list</td><td>Adds the product to the Whisk Shopping List</td></tr>
+    <tr><td>view_list</td><td>Views the current Whisk Shopping List</td></tr>
+  </tbody>
+</table>
+
+### A widget to view the Whisk Shopping List
+
+The simplest possible Whisk widget provides the ability for the user to view their Whisk Shopping List:
+
+{% highlight html linenos %}
+<button type="button" data-whisk-widget data-whisk-product-text data-whisk-action="view_list">
+  View Whisk Shopping List
+</button>
+{% endhighlight %}
+
+Here it is:
+
+<button type="button" data-whisk-widget data-whisk-product-text data-whisk-action="view_list">
+  View Whisk Shopping List
+</button>
+
+
+### A Widget with multiple actions
+
+
+
+The examples we've seen so far are very simple, and you're likely to want more control over the precise markup of your widget, including changing where the user has to click to add the product to the Whisk Shopping List.
+
+There's an extra data attribute to give you flexibility over the click-target that opens the Whisk Shopping List: `data-whisk-action`.
+
+By default, the element marked `data-whisk-widget` is a click target, and clicks anywhere inside it will add the chosen product to the Whisk Shopping List. If you'd rather separate the click target, you can add an element inside the Widget and give it the `data-whisk-action` attribute to make it the clickable target.
+
+{% highlight html linenos %}
+<div data-whisk-widget
+    data-whisk-product-text="Dill pickles"
+    style="border-radius: 5px; border: 1px solid #777; color: #333; background-color: #ddd; padding: 1em;">
+  This Widget let's you
+  <a data-whisk-action="view_list"
+    style="border-radius: 5px; background-color: green; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap; display: inline-block;">
+    View your Whisk Shopping List
+  </a>
+  <br>
+  but let's face it - you really want to
+  <a data-whisk-action="add_product_to_list"
+      style="border-radius: 5px; background-color: brown; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap; display: inline-block;">
+    <i class="fa fa-check-square"></i> Add Dill pickles
+  </a>
+</div>
+{% endhighlight %}
+
+Which looks like:
+
+<div data-whisk-widget
+    data-whisk-product-text="Dill pickles"
+    style="border-radius: 5px; border: 1px solid #777; color: #333; background-color: #ddd; padding: 1em;">
+  This Widget let's you
+  <a data-whisk-action="view_list"
+    style="border-radius: 5px; background-color: green; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap; display: inline-block;">
+    View your Whisk Shopping List
+  </a>
+  <br>
+  but let's face it - you really want to
+  <a data-whisk-action="add_product_to_list"
+      style="border-radius: 5px; background-color: brown; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap; display: inline-block;">
+    <i class="fa fa-check-square"></i> Add Dill pickles
+  </a>
+</div>
 
 
 # Using WhiskConnect in non-English languages
