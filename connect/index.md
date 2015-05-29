@@ -1,9 +1,8 @@
 ---
 layout: page
 title: WhiskConnect
-permalink: /WhiskConnect/
+permalink: /connect/
 ---
-
 
 WhiskConnect is a service that connects your online products to the Whisk Shopping List. You can find more details about WhiskConnect on our [marketing pages](https://whisk.com/connect/).
 
@@ -366,12 +365,40 @@ and here's how it looks in action:
   Ajouter "Escargot" à votre liste de courses
 </button>
 
+
+
+# Automatically open WhiskConnect for display ads
+
+One of the key benefits of WhiskConnect is that you can use it to enable product purchase across all of your advertising channels. For instance, you might have a product page on your website, and then drive traffic to that page with the usual advertising strategies - display advertising on other sites, YouTube ads, Facebook ads, Social media promotions, etc.
+
+Here's a quick demo of how WhiskConnect works for a simple display advertising setup. Imagine you took out a banner advert to advertise your product "Whisk Wonder Salt". It'd probably look something like this:
+
+<div id="fake_page">
+  <a id="banner_advert" href="/connect/demo_salt/?whisk_medium=DisplayAd&whisk-show=1&whisk_source=WhiskDevDocs&whisk_content=ProductLink&whisk_campaign=WhiskDevDemos&whisk_term=Salt">
+    <img src="/connect/images/salt_product.png" alt="Salt" width="100">
+    Whisk Wonder Salt!
+  </a>
+  <div id="fake_site_content"></div>
+</div>
+
+The display advert links to a our own fake product page, but the URL is special:
+
+{% highlight html %}
+http://whisklabs.github.io/connect/demo_salt/?whisk_medium=DisplayAd&whisk-show=1&whisk_source=WhiskDevDocs&whisk_content=ProductLink&whisk_campaign=WhiskDevDemos&whisk_term=Salt
+{% endhighlight %}
+
+This URL has been generated using the [WhiskConnect URL Generator](https://connect.whisk.com/#!/utils/urlgenerator), which adds campaign tracking information to the URL, so that WhiskConnect will correctly add products to the list and track their origin.  Please see the URL generator pages for details on how to create your own campaign URLs.
+
+WhiskConnect generated URLs can be used across all your existing advertising and social platforms - wherever you'd normally send people to a product, you can use WhiskConnect to enable that product for the Whisk Shopping List.
+
+
 # Having trouble?
 
 [Get in touch](mailto:tech@whisk.co.uk) and we'll do our best to help!
 
 
 <style>
+
   .demo_widget_wrapper {
     border-radius: 5px;
     border: 1px solid #777;
@@ -398,6 +425,25 @@ and here's how it looks in action:
   .brown {
     color: white;
     background-color: #930;
+  }
+
+  #fake_page {
+    border: 5px solid #777;
+    border-radius: 5px;
+    background: white;
+  }
+
+  #fake_page #banner_advert {
+    display: block;
+    width: 100%;
+    font-size: 28px;
+    padding: 1em;
+    margin: 1em;
+  }
+  #fake_page #fake_site_content {
+    width: 100%;
+    height: 400px;
+    background: url("{{ baseurl }}/connect/images/fake_wikipedia.png");
   }
 </style>
 

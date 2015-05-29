@@ -1,0 +1,21 @@
+.product {
+  width: 350px;
+  border: 3px solid #888;
+  border-radius: 5px;
+  padding: 2em;
+
+  img {
+    border: 3px solid #eee;
+    border-radius: 5px;
+  }
+  .widget {
+    display: block;
+    padding: 1ex;
+    margin: 1ex;
+    border-radius: 5px;
+    border: 1px solid #777;
+    cursor: pointer;
+    color: white;
+    background-color: green;
+  }
+}
