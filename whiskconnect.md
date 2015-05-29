@@ -5,7 +5,7 @@ permalink: /WhiskConnect/
 ---
 
 
-WhiskConnect is a service that connects your online products to the Whisk Shopping List.
+WhiskConnect is a service that connects your online products to the Whisk Shopping List. You can find more details about WhiskConnect on our [marketing pages](https://whisk.com/connect/).
 
 This document will describe everything you need to get your site WhiskConnected, and is aimed at developers wishing to integrate WhiskConnect into a website containing purchasable products.
 
@@ -36,9 +36,27 @@ In order for you to use Whisk Connect and get access to our dashboards and analy
 
 At present, we're in a limited-access beta, and you need to manually register with us to use WhiskConnect. Don't worry - this is only temporary, and we'll automate the whole process soon enough. For now, if you'd like a WhiskConnect Owner ID, please [get in touch](hello@whisk.com)!
 
-# WhiskConnect widget demos
+## Adding your Owner ID to the page
 
-In order to build a WhiskConnect widget, you
+In order to correlate your products with your Owner ID, you must embed your Owner ID in each product page.  There are two ways to do this:
+
+0. Using a single meta tag on the page
+0. Adding a data-attribute to each Whisk widget
+
+We'll cover the latter case [below](#including-your-owner-id-as-a-widget-data-attribute), after we've seen how to create a Whisk widget.
+
+### Adding your Owner ID as a `<meta>` tag
+
+The simplest way to add your Owner ID to your page is as a `<meta>` tag, usually situated inside the `<head>` of your page.  Assuming your Owner ID is `"d84ecba1-bfb1-4395-99f0-ae02910d4802"`, your `<meta>` tag would look like this:
+
+{% highlight html %}
+<meta name="whisk-owner-id" content="d84ecba1-bfb1-4395-99f0-ae02910d4802">
+{% endhighlight %}
+
+
+# Creating WhiskConnect widgets
+
+In order to build a WhiskConnect widget, you need to add some markup to your page, to create a clickable element that is recognised by WhiskConnect's scripts.
 
 ## A minimal example
 
@@ -61,12 +79,14 @@ and here's how it looks in action:
   A really simply button to add "Almonds" to Whisk
 </button>
 
-### (Include your Owner ID as a data-attribute)
+### Including your Owner ID as a widget data-attribute
 
 The above code assumes you've included your Owner ID in a `<meta>` tag elsewhere in the page. If you'd rather inline it directly into your widget, that's possible - you just need to include the `data-whisk-owner-id` attribute on your widget. This is how we would modify our earlier example:
 
 {% highlight html linenos %}
-<button type="button" data-whisk-widget data-whisk-product-text="Almonds"
+<button type="button"
+    data-whisk-widget
+    data-whisk-product-text="Almonds"
     data-whisk-owner-id="d84ecba1-bfb1-4395-99f0-ae02910d4802">
   A really simply button to add "Almonds", with an Owner ID
 </button>
@@ -81,17 +101,17 @@ The data attributes described can be applied to any clickable HTML element, and 
 {% highlight html linenos %}
 <a data-whisk-widget
     data-whisk-product-text="Biscuits"
-    style="border-radius: 5px; border: 1px solid #777; color: white; background-color: red; padding: 1ex; cursor: pointer; display: inline-block;">
+    class="demo_widget red">
   <i class="fa fa-check-square"></i>
   A slightly nicer widget to add "Biscuits" to Whisk
 </a>
 {% endhighlight %}
 
-and here's how it looks in action:
+and here's a live example:
 
 <a data-whisk-widget
     data-whisk-product-text="Biscuits"
-    style="border-radius: 5px; border: 1px solid #777; color: white; background-color: red; padding: 1ex; cursor: pointer; display: inline-block;">
+    class="demo_widget red">
   <i class="fa fa-check-square"></i>
   A slightly nicer widget to add "Biscuits" to Whisk
 </a>
@@ -109,9 +129,9 @@ By default, the element marked `data-whisk-widget` is a click target, and clicks
 {% highlight html linenos %}
 <div data-whisk-widget
     data-whisk-product-text="Chocolate"
-    style="border-radius: 5px; border: 1px solid #777; color: #333; background-color: #ddd; padding: 1em;">
+    class="demo_widget_wrapper">
   We really want you to add
-  <a data-whisk-action style="border-radius: 5px; background-color: brown; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap;">
+  <a data-whisk-action class="demo_widget brown">
     <i class="fa fa-check-square"></i> Chocolate
   </a>
   to your Whisk Shopping List, but just had to tell you some more about it, and it takes up so much space, and <i>OH MY!</i>.
@@ -122,9 +142,9 @@ Here's how it looks:
 
 <div data-whisk-widget
     data-whisk-product-text="Chocolate"
-    style="border-radius: 5px; border: 1px solid #777; color: #333; background-color: #ddd; padding: 1em;">
+    class="demo_widget_wrapper">
   We really want you to add:
-  <a data-whisk-action style="border-radius: 5px; background-color: brown; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap;">
+  <a data-whisk-action class="demo_widget brown">
     <i class="fa fa-check-square"></i> Chocolate
   </a>
   to your Whisk Shopping List, but just had to tell you some more about it, and it takes up so much space, and <i>OH MY!</i>.
@@ -142,11 +162,12 @@ This can be achieved using `data-whisk-action`, and specifying a value for the a
 
 <table>
   <thead>
-    <tr><th>action</th><th>Code</th></tr>
+    <tr><th><code>data-whisk-action</code></th><th>Code</th></tr>
   </thead>
   <tbody>
-    <tr><td>add_product_to_list</td><td>Adds the product to the Whisk Shopping List</td></tr>
-    <tr><td>view_list</td><td>Views the current Whisk Shopping List</td></tr>
+    <tr><td><code>add_product_to_list</code></td><td>Adds the product to the Whisk Shopping List</td></tr>
+    <tr><td><code>view_list</code></td><td>Views the current Whisk Shopping List</td></tr>
+    <tr><td>(none)</td><td>Defaults to `add_product_to_list</code></td></tr>
   </tbody>
 </table>
 
@@ -180,16 +201,14 @@ By default, the element marked `data-whisk-widget` is a click target, and clicks
 {% highlight html linenos %}
 <div data-whisk-widget
     data-whisk-product-text="Dill pickles"
-    style="border-radius: 5px; border: 1px solid #777; color: #333; background-color: #ddd; padding: 1em;">
+    class="demo_widget_wrapper">
   This Widget let's you
-  <a data-whisk-action="view_list"
-    style="border-radius: 5px; background-color: green; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap; display: inline-block;">
+  <a data-whisk-action="view_list" class="demo_widget green">
     View your Whisk Shopping List
   </a>
   <br>
   but let's face it - you really want to
-  <a data-whisk-action="add_product_to_list"
-      style="border-radius: 5px; background-color: brown; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap; display: inline-block;">
+  <a data-whisk-action="add_product_to_list" class="demo_widget brown">
     <i class="fa fa-check-square"></i> Add Dill pickles
   </a>
 </div>
@@ -199,19 +218,92 @@ Which looks like:
 
 <div data-whisk-widget
     data-whisk-product-text="Dill pickles"
-    style="border-radius: 5px; border: 1px solid #777; color: #333; background-color: #ddd; padding: 1em;">
+    class="demo_widget_wrapper">
   This Widget let's you
-  <a data-whisk-action="view_list"
-    style="border-radius: 5px; background-color: green; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap; display: inline-block;">
+  <a data-whisk-action="view_list" class="demo_widget green">
     View your Whisk Shopping List
   </a>
   <br>
   but let's face it - you really want to
-  <a data-whisk-action="add_product_to_list"
-      style="border-radius: 5px; background-color: brown; color: white; cursor: pointer; padding: 1ex; margin: 1ex; whitespace: no-wrap; display: inline-block;">
+  <a data-whisk-action="add_product_to_list" class="demo_widget brown">
     <i class="fa fa-check-square"></i> Add Dill pickles
   </a>
 </div>
+
+
+
+# Adding your own internal product identifiers
+
+While WhiskConncect works primarily with product text, you may care to add and track specific products, with unique internal identifiers. For this reason, you can associate a Product ID with each WhiskConnected product.
+
+Consider the following example, where a salt manufacturer sells three different types of salt, but would rather keep things simple for the user by just adding "Salt" to the Whisk Shopping List:
+
+<table>
+  <thead>
+    <tr><th>Product</th><th>ID</th><th>Product Text</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1kg Extra value salt</td><td><code>salt-1</code></td><td>Salt</td></tr>
+    <tr><td>500g Everyday salt</td><td><code>salt-2</code></td><td>Salt</td></tr>
+    <tr><td>100g Premium salt</td><td><code>salt-3</code></td><td>Salt</td></tr>
+  </tbody>
+</table>
+
+This is easy to achieve in WhiskConnect: each widget just needs to identify the product ID and text, we'll automatically separate tracking and analytics, and you'll be able to see which prodcut drives higher conversion.
+
+## Add a product ID to a widget
+
+To add a product ID to a widget, you simply need add the `data-whisk-owner-product-id="<your ID here>"` to the widget element:
+
+{% highlight html linenos %}
+<div style="margin: 1ex; padding: 1ex;">
+  Choose your salt:
+  <button type="button"
+      data-whisk-widget
+      data-whisk-owner-product-id="salt-1"
+      data-whisk-product-text="Salt">
+    1kg Extra value salt
+  </button>
+  <button type="button"
+      data-whisk-widget
+      data-whisk-owner-product-id="salt-2"
+      data-whisk-product-text="Salt">
+    500g Everyday salt
+  </button>
+  <button type="button"
+      data-whisk-widget
+      data-whisk-owner-product-id="salt-3"
+      data-whisk-product-text="Salt">
+    100g Premium salt
+  </button>
+</div>
+{% endhighlight %}
+
+which would produce the following buttons:
+
+<div style="margin: 1ex; padding: 1ex;">
+  Choose your salt:
+  <button type="button"
+      data-whisk-widget
+      data-whisk-owner-product-id="salt-1"
+      data-whisk-product-text="Salt">
+    1kg Extra value salt
+  </button>
+  <button type="button"
+      data-whisk-widget
+      data-whisk-owner-product-id="salt-2"
+      data-whisk-product-text="Salt">
+    500g Everyday salt
+  </button>
+  <button type="button"
+      data-whisk-widget
+      data-whisk-owner-product-id="salt-3"
+      data-whisk-product-text="Salt">
+    100g Premium salt
+  </button>
+</div>
+
+Of course, this example is a little contrived - but it shows how it is possible for different product-text values to be associated with the same product ID, and vice-versa.
 
 
 # Using WhiskConnect in non-English languages
@@ -227,17 +319,87 @@ The list of supported languages at present is:
     <tr><th>Language</th><th>Code</th></tr>
   </thead>
   <tbody>
-    <tr><td>English</td><td>en</td></tr>
-    <tr><td>English (GB)</td><td>en-gb</td></tr>
-    <tr><td>English (US)</td><td>en-us</td></tr>
-    <tr><td>French</td><td>fr</td></tr>
-    <tr><td>French (Quebec)</td><td>fr-qc</td></tr>
-    <tr><td>German</td><td>de</td></tr>
-    <tr><td>Polish</td><td>pl</td></tr>
-    <tr><td>Spanish</td><td>es</td></tr>
-    <tr><td>Spanish (Argentinian)</td><td>es-ar</td></tr>
-    <tr><td>Spanish (Mexican)</td><td>es-mx</td></tr>
+    <tr><td>English</td><td><code>en</code></td></tr>
+    <tr><td>English (GB)</td><td><code>en-gb</code></td></tr>
+    <tr><td>English (US)</td><td><code>en-us</code></td></tr>
+    <tr><td>French</td><td><code>fr</code></td></tr>
+    <tr><td>French (Quebec)</td><td><code>fr-qc</code></td></tr>
+    <tr><td>German</td><td><code>de</code></td></tr>
+    <tr><td>Polish</td><td><code>pl</code></td></tr>
+    <tr><td>Spanish</td><td><code>es</code></td></tr>
+    <tr><td>Spanish (Argentinian)</td><td><code>es-ar</code></td></tr>
+    <tr><td>Spanish (Mexican)</td><td><code>es-mx</code></td></tr>
   </tbody>
 </table>
+
+## Setting your language with a `<meta>` tag
+
+If you wish to set your language across all widgets on the page, the easiest way to do this is by adding a `<meta>` tag:
+
+{% highlight html %}
+<meta name="whisk-language" content="fr">
+{% endhighlight %}
+
+All widgets will pick up this language correctly.
+
+## Setting your language with a data-attribute
+
+Alternatively, if you'd rather set the language on each widget, you can do so with a data-attribute.
+
+Here's our original button, but this time for a French product:
+
+{% highlight html linenos %}
+<button type="button"
+    data-whisk-widget
+    data-whisk-language="fr"
+    data-whisk-product-text="Escargot">
+  Ajouter "Escargot" à votre liste de courses
+</button>
+{% endhighlight %}
+
+and here's how it looks in action:
+
+<button type="button"
+    data-whisk-widget
+    data-whisk-language="fr"
+    data-whisk-product-text="Escargot">
+  Ajouter "Escargot" à votre liste de courses
+</button>
+
+# Having trouble?
+
+[Get in touch](mailto:tech@whisk.co.uk) and we'll do our best to help!
+
+
+<style>
+  .demo_widget_wrapper {
+    border-radius: 5px;
+    border: 1px solid #777;
+    color: #333;
+    background-color: #ddd;
+    padding: 1em;
+  }
+  .demo_widget {
+    display: inline-block;
+    padding: 1ex;
+    margin: 1ex;
+    border-radius: 5px;
+    border: 1px solid #777;
+    cursor: pointer;
+  }
+  .red {
+    color: white;
+    background-color: red;
+  }
+  .green {
+    color: white;
+    background-color: green;
+  }
+  .brown {
+    color: white;
+    background-color: #930;
+  }
+</style>
+
 
 <script async="true" src="//widget.whisk.com/assets/whiskbutton.js" type="text/javascript"></script>
