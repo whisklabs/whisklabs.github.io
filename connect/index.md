@@ -367,6 +367,31 @@ and here's how it looks in action:
 
 
 
+# Adding Whisk Widgets dynamically
+
+Many sites load content dynamically, and its possible to do this with Whisk Widgets without any change to the markup.
+
+There is an important caveat, however: the Whisk Script should not be loaded and unloaded dynamically.
+
+Here's a really simpler demo of being able to dynamically add widgets into the page:
+
+<div id="dynamic_widgets">
+  <div>
+    <button type="button" id="dynamic_widget_add">
+      Click this button to add a new widget
+    </button>
+  </div>
+  <ul id="dynamic_widget_container">
+    <li><strong>Dynamic Whisk Widgets will be added below...</strong></li>
+  </ul>
+</div>
+
+
+
+
+
+
+
 # Automatically open WhiskConnect for display ads
 
 One of the key benefits of WhiskConnect is that you can use it to enable product purchase across all of your advertising channels. For instance, you might have a product page on your website, and then drive traffic to that page with the usual advertising strategies - display advertising on other sites, YouTube ads, Facebook ads, Social media promotions, etc.
@@ -445,8 +470,58 @@ WhiskConnect generated URLs can be used across all your existing advertising and
     height: 400px;
     background: url("{{ baseurl }}/connect/images/fake_wikipedia.png");
   }
+
+  ul#dynamic_widget_container {
+    border: 1px solid #ddd;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  ul#dynamic_widget_container li {
+    border: 1px solid #ddd;
+    padding: 1ex;
+    margin: 0;
+  }
 </style>
 
 <meta name="whisk-owner-id" content="d84ecba1-bfb1-4395-99f0-ae02910d4802">
 
 <script async="true" src="//widget.whisk.com/assets/whiskbutton.js" type="text/javascript"></script>
+
+<script>
+  (function(window, document) {
+    var addWidget = function() {
+      var container = document.getElementById("dynamic_widget_container");
+      var next = container.children.length
+      var product = 'Dynamic' + next
+
+      var widgetEl;
+
+      if(next % 2 === 1) {
+        // builds a simple widget
+        widgetEl = document.createElement("button");
+        widgetEl.type = "button"
+        widgetEl.setAttribute("data-whisk-widget",true);
+        widgetEl.setAttribute("data-whisk-product-text",product);
+        widgetEl.innerHTML = 'Simple Add "' + product + '" to Whisk button';
+        container.appendChild(widgetEl);
+      } else {
+        // builds a more stylised widget
+        widgetEl = document.createElement("div");
+        widgetEl.class = "demo_widget_wrapper";
+        widgetEl.setAttribute("data-whisk-widget",true);
+        widgetEl.setAttribute("data-whisk-product-text",product);
+
+        html = 'A more complex nested widget example: ';
+        html += '<a data-whisk-action="add_product_to_list" class="demo_widget green">'
+        html += '<i class="fa fa-check-square"></i> ' + product
+        html += '</a>'
+        widgetEl.innerHTML = html
+      }
+      var li = document.createElement("li");
+      li.appendChild(widgetEl);
+      container.appendChild(li);
+    }
+    document.getElementById("dynamic_widget_add").addEventListener("click", addWidget);
+  })(window, document);
+</script>
