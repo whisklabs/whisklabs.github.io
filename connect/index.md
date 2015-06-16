@@ -369,9 +369,13 @@ and here's how it looks in action:
 
 # Adding Whisk Widgets dynamically
 
-Many sites load content dynamically, and its possible to do this with Whisk Widgets without any change to the markup.
+Many sites load content dynamically, and its possible to do this with Whisk Widgets. The precise details vary by widget type, and are explained below.
 
 There is an important caveat, however: the Whisk Script should not be loaded and unloaded dynamically.
+
+## Product widgets
+
+Product widgets are self-contained, and can be added dynamically to the page without any change to the markup.
 
 Here's a really simpler demo of being able to dynamically add widgets into the page:
 
@@ -386,6 +390,47 @@ Here's a really simpler demo of being able to dynamically add widgets into the p
   </ul>
 </div>
 
+
+
+## Adding Whisk Recipe Widgets dynamically
+
+Product widgets are easy to add dynamically, because they contain all of the information Whisk needs to add them to the Whisk Shopping List. Recipes are different, however: Whisk first checks that the recipe is available (and indeed, a recipe) with the Whisk API. Therefore, adding recipe widgets is more complex than is the case for products.
+
+Because of this complexity, there are some differences in functionality to the standard Whisk publisher integration:
+
+* We do not track events for new Recipe Widgets being visible on page
+* We do not style AJAX-loaded Recipe Widgets. All styling for these widgets is the publisher's responsbility.
+
+Here's a really simpler demo of being able to dynamically add widgets into the page:
+
+<div id="dynamic_recipes">
+  <div>
+    <button type="button" id="dynamic_recipe_add">
+      Click this button to add a new recipe widget
+    </button>
+  </div>
+  <ul id="dynamic_recipe_container">
+    <li><strong>Dynamic Whisk Recipe Widgets will be added below...</strong></li>
+  </ul>
+</div>
+
+Each individual recipe widget is added with a structure like this:
+
+{% highlight html %}
+<button type="button"
+    data-whisk-widget
+    data-whisk-recipe-url="http://example.com/your_recipe_here"
+    style="display: none;">
+  Here's an example of a recipe widget
+</button>
+{% endhighlight %}
+
+There are several important things to note here:
+
+0. You must include `data-whisk-recipe-url="<url_of_your_recipe>"` in your Widget element, to identify the recipe to add;
+0. You must include `style="display: none;"` in your top-level element, so that the widget is hidden prior until the recipe is confirmed as available
+0. Once your content is added into the page, you must call `Whisk.refresh()` to force the Whisk Script to look for new recipe widgets. If you do not call this, the Whisk Script will not look for any new widgets
+0. The recipe widget is initially hidden, but once the Whisk Script has verified that the recipe is correct, the widget will be displayed. If the recipe is not available and correct, it will remain hidden.
 
 
 
@@ -490,7 +535,7 @@ WhiskConnect generated URLs can be used across all your existing advertising and
 
 <script>
   (function(window, document) {
-    var addWidget = function() {
+    var addProductWidget = function() {
       var container = document.getElementById("dynamic_widget_container");
       var next = container.children.length
       var product = 'Dynamic' + next
@@ -522,6 +567,65 @@ WhiskConnect generated URLs can be used across all your existing advertising and
       li.appendChild(widgetEl);
       container.appendChild(li);
     }
-    document.getElementById("dynamic_widget_add").addEventListener("click", addWidget);
+    document.getElementById("dynamic_widget_add").addEventListener("click", addProductWidget);
+  })(window, document);
+</script>
+
+
+
+<script>
+  (function(window, document) {
+    var recipesAvailable = [
+      "https://whisk.com/demo/sponsored-ingredient/",
+      "https://whisk.com/demo/complementary-item/",
+      "https://whisk.com/demo/wine-pairing/",
+      "https://whisk.com/demo/sponsored-retailer/",
+      "https://admin.whisk.com/test_recipe.html",
+      "https://admin.whisk.com/test_recipe_2.html",
+      "https://admin.whisk.com/test_recipe_3.html",
+      "https://admin.whisk.com/test_recipe_4.html"
+    ];
+    var recipesAdded = [];
+
+    var addRecipeWidget = function() {
+      var container = document.getElementById("dynamic_recipe_container");
+      var next = recipesAdded.length;
+      var recipe = recipesAvailable[next];
+      recipesAdded.push(recipe);
+      var buttonText = 'Add ' + recipe;
+
+      var widgetEl;
+
+      if(next % 2 === 1) {
+        // builds a simple widget
+        widgetEl = document.createElement("button");
+        widgetEl.type = "button"
+        widgetEl.setAttribute("data-whisk-widget",true);
+        widgetEl.setAttribute("data-whisk-recipe-url", recipe);
+        widgetEl.setAttribute("style","display: none;");
+        widgetEl.innerHTML = 'Simple Add "' + recipe + '" to Whisk button';
+        container.appendChild(widgetEl);
+      } else {
+        // builds a more stylised widget
+        widgetEl = document.createElement("div");
+        widgetEl.class = "demo_widget_wrapper";
+        widgetEl.setAttribute("data-whisk-widget",true);
+        widgetEl.setAttribute("data-whisk-recipe-url", recipe);
+        widgetEl.setAttribute("style","display: none;");
+
+        html = 'A more complex nested widget example: ';
+        html += '<a data-whisk-action="add_recipe_to_list" class="demo_widget green">'
+        html += '<i class="fa fa-check-square"></i> ' + recipe
+        html += '</a>'
+        widgetEl.innerHTML = html
+      }
+      var li = document.createElement("li");
+      li.innerHTML = "Recipe widget will appear shortly"
+      li.appendChild(widgetEl);
+      container.appendChild(li);
+
+      window.Whisk.refresh();
+    }
+    document.getElementById("dynamic_recipe_add").addEventListener("click", addRecipeWidget);
   })(window, document);
 </script>
