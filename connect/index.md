@@ -462,6 +462,37 @@ This URL has been generated using the [WhiskConnect URL Generator](https://conne
 WhiskConnect generated URLs can be used across all your existing advertising and social platforms - wherever you'd normally send people to a product, you can use WhiskConnect to enable that product for the Whisk Shopping List.
 
 
+# Multiple recipes linked by url
+
+{% highlight html %}
+<button data-whisk-widget data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer">Add to Whisk</button>
+{% endhighlight %}
+
+<img src="/connect/images/recipe_1.jpg" alt="Pizza Alla Napoletana" width="100">
+<strong>Pizza Alla Napoletana</strong>
+<button type="button"
+    data-whisk-widget
+    data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer">
+  Add to Whisk
+</button>
+
+<img src="/connect/images/recipe_2.jpg" alt="Kashmiri Lamb Curry" width="100">
+<strong>Kashmiri Lamb Curry</strong>
+<button type="button"
+    data-whisk-widget
+    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert">
+  Add to Whisk
+</button>
+
+<img src="/connect/images/recipe_1.jpg" alt="Pizza Alla Napoletana" width="100">
+<strong>Pizza Alla Napoletana</strong>
+<button type="button"
+    data-whisk-widget
+    data-whisk-recipe-url="https://whisk.com/demo/sponsored-ingredient">
+  Add to Whisk
+</button>
+
+
 # Having trouble?
 
 [Get in touch](mailto:tech@whisk.co.uk) and we'll do our best to help!
