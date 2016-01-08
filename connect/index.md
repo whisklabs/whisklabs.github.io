@@ -318,7 +318,8 @@ Due to the complexity of recipe processing, we do not currently allow the specif
 Here is a simple example (without styling):
 
 {% highlight html linenos %}
-<button data-whisk-widget
+<button type="button"
+    data-whisk-widget
     data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer"
     style="display: none;">
   Add to Whisk
