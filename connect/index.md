@@ -472,23 +472,18 @@ WhiskConnect generated URLs can be used across all your existing advertising and
 <strong>Pizza Alla Napoletana</strong>
 <button type="button"
     data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer">
+    data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer"
+    data-whisk-environment-app-path='/cadbury.html'
+    style="display: none;">
   Add to Whisk
 </button>
 
 <img src="/connect/images/recipe_2.jpg" alt="Kashmiri Lamb Curry" width="100">
 <strong>Kashmiri Lamb Curry</strong>
 <button type="button"
+    style="display: none;"
     data-whisk-widget
     data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert">
-  Add to Whisk
-</button>
-
-<img src="/connect/images/recipe_1.jpg" alt="Pizza Alla Napoletana" width="100">
-<strong>Pizza Alla Napoletana</strong>
-<button type="button"
-    data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/sponsored-ingredient">
   Add to Whisk
 </button>
 
