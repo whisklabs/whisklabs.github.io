@@ -14,7 +14,7 @@ Specifically, we will cover:
 {:toc}
 
 
-# Adding the WhiskConnect script to your product page
+# Adding the WhiskConnect script to your page
 
 In order to integrate WhiskConnect, you need to include a small piece of JavaScript on your page:
 
@@ -305,65 +305,89 @@ which would produce the following buttons:
 Of course, this example is a little contrived - but it shows how it is possible for different product-text values to be associated with the same product ID, and vice-versa.
 
 
-# Using WhiskConnect in non-English languages
 
-By default, WhiskConnect assumes your products are written in English, but we at Whisk love all languages... we're just a bit time-limited.
 
-We support a number of other languages, and you can specify the language of a product widget by including the `data-whisk-language` attribute, and specifying a language code. Here are a few examples:
+# Embedding recipe widgets in the page
 
-The list of supported languages at present is:
+As with Product Widgets, it is possible to directly embed recipe widgets within the page. The typical use case for this is to provide a Whisk Widget alongside a link to a recipe - for instance, from a meal plan or search results page.
 
-<table>
-  <thead>
-    <tr><th>Language</th><th>Code</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>English</td><td><code>en</code></td></tr>
-    <tr><td>English (GB)</td><td><code>en-gb</code></td></tr>
-    <tr><td>English (US)</td><td><code>en-us</code></td></tr>
-    <tr><td>French</td><td><code>fr</code></td></tr>
-    <tr><td>French (Quebec)</td><td><code>fr-qc</code></td></tr>
-    <tr><td>German</td><td><code>de</code></td></tr>
-    <tr><td>Polish</td><td><code>pl</code></td></tr>
-    <tr><td>Spanish</td><td><code>es</code></td></tr>
-    <tr><td>Spanish (Argentinian)</td><td><code>es-ar</code></td></tr>
-    <tr><td>Spanish (Mexican)</td><td><code>es-mx</code></td></tr>
-  </tbody>
-</table>
+Due to the complexity of recipe processing, we do not currently allow the specification of an entire recipe in the widget; instead, we permit widgets that reference existing recipes, which are already available through Whisk. This is achieved by creating a Whisk Widget with a `data-whisk-recipe-url` attribute, which specifies the URL of the target recipe. This URL must uniquely identify the target recipe.
 
-## Setting your language with a `<meta>` tag
+## A simple embedded recipe widget
 
-If you wish to set your language across all widgets on the page, the easiest way to do this is by adding a `<meta>` tag:
-
-{% highlight html %}
-<meta name="whisk-language" content="fr">
-{% endhighlight %}
-
-All widgets will pick up this language correctly.
-
-## Setting your language with a data-attribute
-
-Alternatively, if you'd rather set the language on each widget, you can do so with a data-attribute.
-
-Here's our original button, but this time for a French product:
+Here is a simple example (without styling):
 
 {% highlight html linenos %}
-<button type="button"
-    data-whisk-widget
-    data-whisk-language="fr"
-    data-whisk-product-text="Escargot">
-  Ajouter "Escargot" à votre liste de courses
+<button data-whisk-widget
+    data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer"
+    style="display: none;">
+  Add to Whisk
 </button>
 {% endhighlight %}
 
-and here's how it looks in action:
+<img src="/connect/images/recipe_2.jpg" alt="Kashmiri Lamb Curry" width="100">
+<strong>Kashmiri Lamb Curry</strong>
+<button type="button"
+    style="display: none;"
+    data-whisk-widget
+    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert">
+  Add to Whisk
+</button>
 
+We recommend you use of `style="display: none;"` in your top-level `data-whisk-widget` element. This will ensure that if our recipe processing engine is unable to understand the recipe, the widget will remain hidden.
+
+Since the recipe widget DOM elements will be part of your page, you are free to [style your widget as you wish](#styling-your-widget).
+
+## Multiple Recipe Widgets
+
+You can embed as many Recipe Widgets as you wish in the page, provided they have distinct URLs.
+
+Here's an example:
+
+{% highlight html linenos %}
+
+<img src="/connect/images/recipe_2.jpg" alt="Kashmiri Lamb Curry" width="100">
+<strong>Kashmiri Lamb Curry</strong>
+<button type="button"
+    style="display: none;"
+    data-whisk-widget
+    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert">
+  Add to Whisk
+</button>
+
+<img src="/connect/images/recipe_1.jpg" alt="Pizza Alla Napoletana" width="100">
+<strong>Pizza Alla Napoletana</strong>
 <button type="button"
     data-whisk-widget
-    data-whisk-language="fr"
-    data-whisk-product-text="Escargot">
-  Ajouter "Escargot" à votre liste de courses
+    data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer"
+    data-whisk-environment-app-path="/cadbury.html"
+    style="display: none;">
+  Add to Whisk
 </button>
+
+{% endhighlight %}
+
+<img src="/connect/images/recipe_2.jpg" alt="Kashmiri Lamb Curry" width="100">
+<strong>Kashmiri Lamb Curry</strong>
+<button type="button"
+    style="display: none;"
+    data-whisk-widget
+    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert">
+  Add to Whisk
+</button>
+
+<img src="/connect/images/recipe_1.jpg" alt="Pizza Alla Napoletana" width="100">
+<strong>Pizza Alla Napoletana</strong>
+<button type="button"
+    data-whisk-widget
+    data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer"
+    style="display: none;">
+  Add to Whisk
+</button>
+
+You should be able to add as many recipes as you like, but these recipe URLs must be available when the page loads.  If you wish to load widgets dynamically (e.g. add recipes to the page by AJAX), please read the [Adding Whisk Widgets dynamically](#adding-whisk-widgets-dynamically) section.
+
+
 
 
 
@@ -427,9 +451,9 @@ Each individual recipe widget is added with a structure like this:
 
 There are several important things to note here:
 
-0. You must include `data-whisk-recipe-url="<url_of_your_recipe>"` in your Widget element, to identify the recipe to add;
-0. You must include `style="display: none;"` in your top-level element, so that the widget is hidden prior until the recipe is confirmed as available
-0. Once your content is added into the page, you must call `Whisk.refresh()` to force the Whisk Script to look for new recipe widgets. If you do not call this, the Whisk Script will not look for any new widgets
+0. You must include `data-whisk-recipe-url="<url_of_your_recipe>"` in your Widget element, to identify the recipe to add.
+0. You must include `style="display: none;"` in your top-level element, so that the widget is hidden until the recipe is confirmed as available.
+0. Once your content is added into the page, you must call `Whisk.refresh()` to force the Whisk Script to look for new recipe widgets. If you do not call this, the Whisk Script will not look for any new widgets.
 0. The recipe widget is initially hidden, but once the Whisk Script has verified that the recipe is correct, the widget will be displayed. If the recipe is not available and correct, it will remain hidden.
 
 
@@ -457,9 +481,78 @@ The display advert links to a our own fake product page, but the URL is special:
 http://whisklabs.github.io/connect/demo_salt/?whisk_medium=DisplayAd&whisk-show=1&whisk_source=WhiskDevDocs&whisk_content=ProductLink&whisk_campaign=WhiskDevDemos&whisk_term=Salt
 {% endhighlight %}
 
-This URL has been generated using the [WhiskConnect URL Generator](https://connect.whisk.com/#!/utils/urlgenerator), which adds campaign tracking information to the URL, so that WhiskConnect will correctly add products to the list and track their origin.  Please see the URL generator pages for details on how to create your own campaign URLs.
+This URL has been generated using the [WhiskConnect URL Generator](https://business.whisk.com/linkbuilder), which adds campaign tracking information to the URL, so that WhiskConnect will correctly add products to the list and track their origin.  Please see the URL generator pages for details on how to create your own campaign URLs.
 
 WhiskConnect generated URLs can be used across all your existing advertising and social platforms - wherever you'd normally send people to a product, you can use WhiskConnect to enable that product for the Whisk Shopping List.
+
+
+
+
+
+
+# Using WhiskConnect in non-English languages
+
+By default, WhiskConnect assumes your products are written in English, but we at Whisk love all languages... we're just a bit time-limited.
+
+We support a number of other languages, and you can specify the language of a product widget by including the `data-whisk-language` attribute, and specifying a language code. Here are a few examples:
+
+The list of supported languages at present is:
+
+<table>
+  <thead>
+    <tr><th>Language</th><th>Code</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>English</td><td><code>en</code></td></tr>
+    <tr><td>English (GB)</td><td><code>en-gb</code></td></tr>
+    <tr><td>English (US)</td><td><code>en-us</code></td></tr>
+    <tr><td>French</td><td><code>fr</code></td></tr>
+    <tr><td>French (Quebec)</td><td><code>fr-qc</code></td></tr>
+    <tr><td>German</td><td><code>de</code></td></tr>
+    <tr><td>Polish</td><td><code>pl</code></td></tr>
+    <tr><td>Spanish</td><td><code>es</code></td></tr>
+    <tr><td>Spanish (Argentinian)</td><td><code>es-ar</code></td></tr>
+    <tr><td>Spanish (Mexican)</td><td><code>es-mx</code></td></tr>
+  </tbody>
+</table>
+
+## Setting your language with a `<meta>` tag
+
+If you wish to set your language across all widgets on the page, the easiest way to do this is by adding a `<meta>` tag:
+
+{% highlight html %}
+<meta name="whisk-language" content="fr">
+{% endhighlight %}
+
+All widgets will pick up this language correctly.
+
+## Setting your language with a data-attribute
+
+Alternatively, if you'd rather set the language on each widget, you can do so with a data-attribute.
+
+Here's our original button, but this time for a French product:
+
+{% highlight html linenos %}
+<button type="button"
+    data-whisk-widget
+    data-whisk-language="fr"
+    data-whisk-product-text="Escargot">
+  Ajouter "Escargot" à votre liste de courses
+</button>
+{% endhighlight %}
+
+and here's how it looks in action:
+
+<button type="button"
+    data-whisk-widget
+    data-whisk-language="fr"
+    data-whisk-product-text="Escargot">
+  Ajouter "Escargot" à votre liste de courses
+</button>
+
+
+
+
 
 
 # Having trouble?
