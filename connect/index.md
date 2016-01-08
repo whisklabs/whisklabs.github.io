@@ -349,9 +349,9 @@ Here's an example:
 <img src="/connect/images/recipe_2.jpg" alt="Kashmiri Lamb Curry" width="100">
 <strong>Kashmiri Lamb Curry</strong>
 <button type="button"
-    style="display: none;"
     data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert">
+    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert"
+    style="display: none;">
   Add to Whisk
 </button>
 
@@ -360,7 +360,6 @@ Here's an example:
 <button type="button"
     data-whisk-widget
     data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer"
-    data-whisk-environment-app-path="/cadbury.html"
     style="display: none;">
   Add to Whisk
 </button>
@@ -370,9 +369,9 @@ Here's an example:
 <img src="/connect/images/recipe_2.jpg" alt="Kashmiri Lamb Curry" width="100">
 <strong>Kashmiri Lamb Curry</strong>
 <button type="button"
-    style="display: none;"
     data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert">
+    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert"
+    style="display: none;">
   Add to Whisk
 </button>
 
