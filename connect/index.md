@@ -307,13 +307,13 @@ Of course, this example is a little contrived - but it shows how it is possible 
 
 
 
-## Embedding recipe widgets in the page
+# Embedding recipe widgets in the page
 
 As with Product Widgets, it is possible to directly embed recipe widgets within the page. The typical use case for this is to provide a Whisk Widget alongside a link to a recipe - for instance, from a meal plan or search results page.
 
 Due to the complexity of recipe processing, we do not currently allow the specification of an entire recipe in the widget; instead, we permit widgets that reference existing recipes, which are already available through Whisk. This is achieved by creating a Whisk Widget with a `data-whisk-recipe-url` attribute, which specifies the URL of the target recipe. This URL must uniquely identify the target recipe.
 
-### A simple embedded recipe widget
+## A simple embedded recipe widget
 
 Here is a simple example (without styling):
 
@@ -338,7 +338,7 @@ We recommend you use of `style="display: none;"` in your top-level `data-whisk-w
 
 Since the recipe widget DOM elements will be part of your page, you are free to [style your widget as you wish](#styling-your-widget).
 
-### Multiple Recipe Widgets
+## Multiple Recipe Widgets
 
 You can embed as many Recipe Widgets as you wish in the page, provided they have distinct URLs.
 
@@ -388,65 +388,6 @@ Here's an example:
 You should be able to add as many recipes as you like, but these recipe URLs must be available when the page loads.  If you wish to load widgets dynamically (e.g. add recipes to the page by AJAX), please read the [Adding Whisk Widgets dynamically](#adding-whisk-widgets-dynamically) section.
 
 
-# Using WhiskConnect in non-English languages
-
-By default, WhiskConnect assumes your products are written in English, but we at Whisk love all languages... we're just a bit time-limited.
-
-We support a number of other languages, and you can specify the language of a product widget by including the `data-whisk-language` attribute, and specifying a language code. Here are a few examples:
-
-The list of supported languages at present is:
-
-<table>
-  <thead>
-    <tr><th>Language</th><th>Code</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>English</td><td><code>en</code></td></tr>
-    <tr><td>English (GB)</td><td><code>en-gb</code></td></tr>
-    <tr><td>English (US)</td><td><code>en-us</code></td></tr>
-    <tr><td>French</td><td><code>fr</code></td></tr>
-    <tr><td>French (Quebec)</td><td><code>fr-qc</code></td></tr>
-    <tr><td>German</td><td><code>de</code></td></tr>
-    <tr><td>Polish</td><td><code>pl</code></td></tr>
-    <tr><td>Spanish</td><td><code>es</code></td></tr>
-    <tr><td>Spanish (Argentinian)</td><td><code>es-ar</code></td></tr>
-    <tr><td>Spanish (Mexican)</td><td><code>es-mx</code></td></tr>
-  </tbody>
-</table>
-
-## Setting your language with a `<meta>` tag
-
-If you wish to set your language across all widgets on the page, the easiest way to do this is by adding a `<meta>` tag:
-
-{% highlight html %}
-<meta name="whisk-language" content="fr">
-{% endhighlight %}
-
-All widgets will pick up this language correctly.
-
-## Setting your language with a data-attribute
-
-Alternatively, if you'd rather set the language on each widget, you can do so with a data-attribute.
-
-Here's our original button, but this time for a French product:
-
-{% highlight html linenos %}
-<button type="button"
-    data-whisk-widget
-    data-whisk-language="fr"
-    data-whisk-product-text="Escargot">
-  Ajouter "Escargot" à votre liste de courses
-</button>
-{% endhighlight %}
-
-and here's how it looks in action:
-
-<button type="button"
-    data-whisk-widget
-    data-whisk-language="fr"
-    data-whisk-product-text="Escargot">
-  Ajouter "Escargot" à votre liste de courses
-</button>
 
 
 
@@ -540,9 +481,77 @@ The display advert links to a our own fake product page, but the URL is special:
 http://whisklabs.github.io/connect/demo_salt/?whisk_medium=DisplayAd&whisk-show=1&whisk_source=WhiskDevDocs&whisk_content=ProductLink&whisk_campaign=WhiskDevDemos&whisk_term=Salt
 {% endhighlight %}
 
-This URL has been generated using the [WhiskConnect URL Generator](https://connect.whisk.com/#!/utils/urlgenerator), which adds campaign tracking information to the URL, so that WhiskConnect will correctly add products to the list and track their origin.  Please see the URL generator pages for details on how to create your own campaign URLs.
+This URL has been generated using the [WhiskConnect URL Generator](https://business.whisk.com/linkbuilder), which adds campaign tracking information to the URL, so that WhiskConnect will correctly add products to the list and track their origin.  Please see the URL generator pages for details on how to create your own campaign URLs.
 
 WhiskConnect generated URLs can be used across all your existing advertising and social platforms - wherever you'd normally send people to a product, you can use WhiskConnect to enable that product for the Whisk Shopping List.
+
+
+
+
+
+
+# Using WhiskConnect in non-English languages
+
+By default, WhiskConnect assumes your products are written in English, but we at Whisk love all languages... we're just a bit time-limited.
+
+We support a number of other languages, and you can specify the language of a product widget by including the `data-whisk-language` attribute, and specifying a language code. Here are a few examples:
+
+The list of supported languages at present is:
+
+<table>
+  <thead>
+    <tr><th>Language</th><th>Code</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>English</td><td><code>en</code></td></tr>
+    <tr><td>English (GB)</td><td><code>en-gb</code></td></tr>
+    <tr><td>English (US)</td><td><code>en-us</code></td></tr>
+    <tr><td>French</td><td><code>fr</code></td></tr>
+    <tr><td>French (Quebec)</td><td><code>fr-qc</code></td></tr>
+    <tr><td>German</td><td><code>de</code></td></tr>
+    <tr><td>Polish</td><td><code>pl</code></td></tr>
+    <tr><td>Spanish</td><td><code>es</code></td></tr>
+    <tr><td>Spanish (Argentinian)</td><td><code>es-ar</code></td></tr>
+    <tr><td>Spanish (Mexican)</td><td><code>es-mx</code></td></tr>
+  </tbody>
+</table>
+
+## Setting your language with a `<meta>` tag
+
+If you wish to set your language across all widgets on the page, the easiest way to do this is by adding a `<meta>` tag:
+
+{% highlight html %}
+<meta name="whisk-language" content="fr">
+{% endhighlight %}
+
+All widgets will pick up this language correctly.
+
+## Setting your language with a data-attribute
+
+Alternatively, if you'd rather set the language on each widget, you can do so with a data-attribute.
+
+Here's our original button, but this time for a French product:
+
+{% highlight html linenos %}
+<button type="button"
+    data-whisk-widget
+    data-whisk-language="fr"
+    data-whisk-product-text="Escargot">
+  Ajouter "Escargot" à votre liste de courses
+</button>
+{% endhighlight %}
+
+and here's how it looks in action:
+
+<button type="button"
+    data-whisk-widget
+    data-whisk-language="fr"
+    data-whisk-product-text="Escargot">
+  Ajouter "Escargot" à votre liste de courses
+</button>
+
+
+
 
 
 
