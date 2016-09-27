@@ -4,7 +4,7 @@ title: WhiskConnect
 permalink: /connect/
 ---
 
-WhiskConnect is a service that connects your online products to the Whisk Shopping List. You can find more details about WhiskConnect on our [marketing pages](https://whisk.com/connect/).
+WhiskConnect is a service that connects your online products to the Whisk Shopping List. You can find more details about WhiskConnect on our [marketing pages](https://about.whisk.com/business/products/whiskconnect).
 
 This document will describe everything you need to get your site WhiskConnected, and is aimed at developers wishing to integrate WhiskConnect into a website containing purchasable products.
 
@@ -320,7 +320,7 @@ Here is a simple example (without styling):
 {% highlight html linenos %}
 <button type="button"
     data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer"
+    data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
     style="display: none;">
   Add to Whisk
 </button>
@@ -331,7 +331,7 @@ Here is a simple example (without styling):
 <button type="button"
     style="display: none;"
     data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert">
+    data-whisk-recipe-url="https://about.whisk.com/demo/complementary-item-advert">
   Add to Whisk
 </button>
 
@@ -351,7 +351,7 @@ Here's an example:
 <strong>Kashmiri Lamb Curry</strong>
 <button type="button"
     data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert"
+    data-whisk-recipe-url="https://about.whisk.com/demo/complementary-item-advert"
     style="display: none;">
   Add to Whisk
 </button>
@@ -360,7 +360,7 @@ Here's an example:
 <strong>Pizza Alla Napoletana</strong>
 <button type="button"
     data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer"
+    data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
     style="display: none;">
   Add to Whisk
 </button>
@@ -371,7 +371,7 @@ Here's an example:
 <strong>Kashmiri Lamb Curry</strong>
 <button type="button"
     data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/complementary-item-advert"
+    data-whisk-recipe-url="https://about.whisk.com/demo/complementary-item-advert"
     style="display: none;">
   Add to Whisk
 </button>
@@ -380,7 +380,7 @@ Here's an example:
 <strong>Pizza Alla Napoletana</strong>
 <button type="button"
     data-whisk-widget
-    data-whisk-recipe-url="https://whisk.com/demo/sponsored-retailer"
+    data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
     style="display: none;">
   Add to Whisk
 </button>
@@ -669,14 +669,10 @@ and here's how it looks in action:
 <script>
   (function(window, document) {
     var recipesAvailable = [
-      "https://whisk.com/demo/sponsored-ingredient/",
-      "https://whisk.com/demo/complementary-item/",
-      "https://whisk.com/demo/wine-pairing/",
-      "https://whisk.com/demo/sponsored-retailer/",
-      "https://admin.whisk.com/test_recipe.html",
-      "https://admin.whisk.com/test_recipe_2.html",
-      "https://admin.whisk.com/test_recipe_3.html",
-      "https://admin.whisk.com/test_recipe_4.html"
+      "https://about.whisk.com/demo/sponsored-ingredient/",
+      "https://about.whisk.com/demo/complementary-item/",
+      "https://about.whisk.com/demo/wine-pairing/",
+      "https://about.whisk.com/demo/sponsored-retailer/"
     ];
     var recipesAdded = [];
 
