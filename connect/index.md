@@ -311,7 +311,7 @@ Of course, this example is a little contrived - but it shows how it is possible 
 
 As with Product Widgets, it is possible to directly embed recipe widgets within the page. The typical use case for this is to provide a Whisk Widget alongside a link to a recipe - for instance, from a meal plan or search results page.
 
-Due to the complexity of recipe processing, we do not currently allow the specification of an entire recipe in the widget; instead, we permit widgets that reference existing recipes, which are already available through Whisk. This is achieved by creating a Whisk Widget with a `data-whisk-recipe-url` attribute, which specifies the URL of the target recipe. This URL must uniquely identify the target recipe.
+Due to the complexity of recipe processing, we do not currently allow the specification of an entire recipe in the widget; instead, we permit widgets that reference existing recipes, which are already available through Whisk. This is achieved by creating a Whisk Widget with a `data-whisk-recipe-url` attribute, which specifies the URL of the target recipe, and `data-whisk-action` attribute, which tells Widget what to do with this recipe. This URL must uniquely identify the target recipe.
 
 ## A simple embedded recipe widget
 
@@ -320,6 +320,7 @@ Here is a simple example (without styling):
 {% highlight html linenos %}
 <button type="button"
     data-whisk-widget
+    data-whisk-action="add_recipe_to_list"
     data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
     style="display: none;">
   Add to Whisk
@@ -331,6 +332,7 @@ Here is a simple example (without styling):
 <button type="button"
     style="display: none;"
     data-whisk-widget
+    data-whisk-action="add_recipe_to_list"
     data-whisk-recipe-url="https://about.whisk.com/demo/complementary-item-advert">
   Add to Whisk
 </button>
@@ -351,6 +353,7 @@ Here's an example:
 <strong>Kashmiri Lamb Curry</strong>
 <button type="button"
     data-whisk-widget
+    data-whisk-action="add_recipe_to_list"
     data-whisk-recipe-url="https://about.whisk.com/demo/complementary-item-advert"
     style="display: none;">
   Add to Whisk
@@ -360,6 +363,7 @@ Here's an example:
 <strong>Pizza Alla Napoletana</strong>
 <button type="button"
     data-whisk-widget
+    data-whisk-action="add_recipe_to_list"
     data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
     style="display: none;">
   Add to Whisk
@@ -371,6 +375,7 @@ Here's an example:
 <strong>Kashmiri Lamb Curry</strong>
 <button type="button"
     data-whisk-widget
+    data-whisk-action="add_recipe_to_list"
     data-whisk-recipe-url="https://about.whisk.com/demo/complementary-item-advert"
     style="display: none;">
   Add to Whisk
@@ -380,6 +385,7 @@ Here's an example:
 <strong>Pizza Alla Napoletana</strong>
 <button type="button"
     data-whisk-widget
+    data-whisk-action="add_recipe_to_list"
     data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
     style="display: none;">
   Add to Whisk
@@ -443,6 +449,7 @@ Each individual recipe widget is added with a structure like this:
 {% highlight html %}
 <button type="button"
     data-whisk-widget
+    data-whisk-action="add_recipe_to_list"
     data-whisk-recipe-url="http://example.com/your_recipe_here"
     style="display: none;">
   Here's an example of a recipe widget
