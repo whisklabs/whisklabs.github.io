@@ -33,7 +33,7 @@ WhiskConnect can easily connect any text-based products to the Whisk Shopping Li
 
 In order for you to use Whisk Connect and get access to our dashboards and analytics, you first need to register with Whisk to become an "owner" of connected products. This allows us to group together all your products and analytic information so that you can track how your customers are using WhiskConnect.
 
-At present, we're in a limited-access beta, and you need to manually register with us to use WhiskConnect. Don't worry - this is only temporary, and we'll automate the whole process soon enough. For now, if you'd like a WhiskConnect Owner ID, please [get in touch](hello@whisk.com)!
+At present, we're in a limited-access beta, and you need to manually register with us to use WhiskConnect. Don't worry - this is only temporary, and we'll automate the whole process soon enough. For now, if you'd like a WhiskConnect Owner ID, please [get in touch](mailto:tech@whisk.com)!
 
 ## Adding your Owner ID to the page
 
