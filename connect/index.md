@@ -678,7 +678,6 @@ and here's how it looks in action:
     var recipesAvailable = [
       "https://about.whisk.com/demo/sponsored-ingredient/",
       "https://about.whisk.com/demo/complementary-item-advert",
-      "https://about.whisk.com/demo/wine-recommendation-widget",
       "https://about.whisk.com/demo/sponsored-retailer/"
     ];
     var recipesAdded = [];
