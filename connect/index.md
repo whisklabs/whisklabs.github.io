@@ -677,15 +677,15 @@ and here's how it looks in action:
   (function(window, document) {
     var recipesAvailable = [
       "https://about.whisk.com/demo/sponsored-ingredient/",
-      "https://about.whisk.com/demo/complementary-item/",
-      "https://about.whisk.com/demo/wine-pairing/",
+      "https://about.whisk.com/demo/complementary-item-advert",
+      "https://about.whisk.com/demo/wine-recommendation-widget",
       "https://about.whisk.com/demo/sponsored-retailer/"
     ];
     var recipesAdded = [];
 
     var addRecipeWidget = function() {
       var container = document.getElementById("dynamic_recipe_container");
-      var next = recipesAdded.length;
+      var next = recipesAdded.length % recipesAvailable.length;
       var recipe = recipesAvailable[next];
       recipesAdded.push(recipe);
       var buttonText = 'Add ' + recipe;
