@@ -564,10 +564,9 @@ If you wish to set region for your widget manually, you can do so with a data-at
 {% highlight html linenos %}
 <button type="button"
     data-whisk-widget
-    data-whisk-action="add_recipe_to_list"
-    data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
+    data-whisk-product-text="Almonds"
     data-whisk-region="AU">
-  Add recipe to Whisk
+  Add almonds to Whisk
 </button>
 {% endhighlight %}
 
@@ -575,10 +574,9 @@ and here's how it looks in action:
 
 <button type="button"
     data-whisk-widget
-    data-whisk-action="add_recipe_to_list"
-    data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
+    data-whisk-product-text="Almonds"
     data-whisk-region="AU">
-  Add recipe to Whisk
+  Add almonds to Whisk
 </button>
 
 
