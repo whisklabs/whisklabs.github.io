@@ -557,8 +557,27 @@ and here's how it looks in action:
   Ajouter "Escargot" à votre liste de courses
 </button>
 
+## Setting your region with a data-attribute
 
+If you wish to set region for your widget manually, you can do so with a data-attribute:
 
+{% highlight html linenos %}
+<button type="button"
+    data-whisk-widget
+    data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
+    data-whisk-region="AU">
+  Add recipe to Whisk
+</button>
+{% endhighlight %}
+
+and here's how it looks in action:
+
+<button type="button"
+    data-whisk-widget
+    data-whisk-recipe-url="https://about.whisk.com/demo/sponsored-retailer"
+    data-whisk-region="AU">
+  Add recipe to Whisk
+</button>
 
 
 
