@@ -248,7 +248,7 @@ Consider the following example, where a salt manufacturer sells three different 
   </tbody>
 </table>
 
-This is easy to achieve in WhiskConnect: each widget just needs to identify the product ID and text, we'll automatically separate tracking and analytics, and you'll be able to see which prodcut drives higher conversion.
+This is easy to achieve in WhiskConnect: each widget just needs to identify the product ID and text, we'll automatically separate tracking and analytics, and you'll be able to see which product drives higher conversion.
 
 ## Add a product ID to a widget
 
